@@ -11,11 +11,13 @@ var session = require('express-session');
 var app = express();
 app.use(cors())
 app.use(bodyparser.json())
-app.use('/api/users',require('./controllers/userDetails.controller'))
+app.use('/api/users',require('./controllers/userDetails.controller'));
+app.use('/api/file',require('./controllers/fileOperations.controller')); //upload file
 app.use('/Files', express.static(__dirname + '/Files'));//  download file
 app.get('/',(req,res)=>{
     res.send('footer')
 })
+
 app.get('/get',(req,res)=>{
     console.log("server")
     res.send("send")

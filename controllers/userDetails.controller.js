@@ -17,9 +17,9 @@ module.exports = router;
  * @description:Get User Info.
  */
 function getUserDetails(req, res) {
-    console.log("req in controller",req.query.params);
-    console.log("req in controller",req.params);
-    userInfoService.getUserDetails(req).then(function(data) {
+    var  fileName = req.query.fileName;
+    // console.log("req in controller",req.query);
+    userInfoService.getUserDetails(fileName).then(function(data) {
             res.send(data);
         })
         .catch(function(err) {

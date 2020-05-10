@@ -50,8 +50,9 @@ sgMail
 }
 
 // Get User Details from DB
-function getUserDetails(req,res){
-    var fileName = 'Files1.csv'
+function getUserDetails(fileName,res){
+    var fileName = fileName;
+    console.log("in service",fileName);
     var file_data = fs.readFileSync(path.join(__dirname, '../Files/'+fileName), { encoding : 'utf8'});
     var result = csvjson.toObject(file_data, options);
     console.log("requestedData is",result)
@@ -67,12 +68,12 @@ function getUserDetails(req,res){
     //    return info;
     //        });
 
-    currencyConversion.getCurrencies(req,res).then(function(data) {
+    currencyConversion.getCurrencies(fileName,res).then(function(data) {
         console.log("currencyConversion response:",data["usdValue"])
         var date = new Date();
         var usdValues = result.map(function(item){
-            var info = { "Amount:": item.Amount,
-            "Currency:": item.Currency,
+            var info = { "Amount": item.Amount,
+            "Currency": item.Currency,
             "convertedAmount": item.Amount * data["usdValue"],
             "convertedCurrency": 'USD',
             "Date": date
