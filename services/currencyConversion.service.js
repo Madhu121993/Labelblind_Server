@@ -1,6 +1,6 @@
 /**
  * Created By :- Madhu Jha
- * Created Date :- 05--2020 8:18 pm
+ * Created Date :- 10--2020 8:18 pm
  * Version :- 1.0
  */
 
@@ -15,6 +15,7 @@ var config = require('../config/config')
 service.getCurrencies = getCurrencies;
 module.exports = service;
 
+// get Currencies
 function getCurrencies(req,res){
     var deferred = Q.defer();
     var currencyTYpe = 'INR';
@@ -28,7 +29,6 @@ function getCurrencies(req,res){
     }).then(function (data) {
         var currenciesValues = JSON.parse(data);
         var usdValue = currenciesValues["rates"]["USD"]
-        console.log("getCurrencies res: ",usdValue)
         deferred.resolve({usdValue:usdValue});
     })
     return deferred.promise;
